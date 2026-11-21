@@ -1,24 +1,25 @@
 package com.pruebas.api;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import io.restassured.RestAssured;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
-class CursoApiTest {
+public class CursoApiTest {
+
+    private static final String ALUMNO = "Jimmy John Huo Pérez Espinoza";
+    private static final String CODIGO = "202504498";
 
     @BeforeAll
-    static void setup() {
+    static void configurarApi() {
+        System.out.println("Alumno: " + ALUMNO + " Código: " + CODIGO);
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8080;
     }
 
     @Test
-    @DisplayName("Escenario 1: Consultar todos los cursos")
     void consultarTodosLosCursos() {
         given()
                 .when()
@@ -29,7 +30,6 @@ class CursoApiTest {
     }
 
     @Test
-    @DisplayName("Escenario 2: Consultar el curso por id")
     void consultarCursoPorId() {
         given()
                 .pathParam("id", 2)
